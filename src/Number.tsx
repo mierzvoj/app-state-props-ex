@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useCallback, useState} from "react";
 
 export interface NumberProps {
     number: number;
@@ -6,15 +6,24 @@ export interface NumberProps {
 }
 
 const Number = ({number, isHex}: NumberProps) => {
-    const [value, setValue] = useState(isHex);
-    console.log(value);
-    console.log(setValue);
+    const [hex, setHex] = React.useState(isHex);
+
+    console.log(hex);
+    console.log(setHex);
+
+    const toggle = () => {
+        setHex(!hex)
+    };
 
 
     return (
-        <span>
-            My number is {number} {isHex};
-        </span>
+        <div>
+            My number is  <b>{hex ? number.toString(16) : number }</b>;
+
+            <button onClick={toggle}>toggle from number</button>
+            From number: Boolean is set to <b>{String(isHex)}</b>
+
+        </div>
     )
 }
 export default Number;
